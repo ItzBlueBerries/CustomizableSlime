@@ -1,0 +1,10 @@
+﻿{
+  "id": "customizableog",
+  "name": "Customizable Slime",
+  "author": "FruitsyOG",
+  "description": "Customize your very own slime from within configurations!",
+  "version": "1.0",
+  "load_after": [
+    "shortcutlibog"
+  ]
+}

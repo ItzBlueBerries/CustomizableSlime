@@ -1,0 +1,39 @@
+﻿--- CUSTOMIZABLE SLIME INSTRUCTIONS ---
+
+To get started customizing your slime, there are quite a few steps to do! Follow it carefully or well.. just good enough to understand everything.
+
+[PREPARING]
+
+1. Add the .DLL file to your Mods folder & run the game.
+
+Doing this will add all the configurations, etc for Customizable Slime Mod! You will get an error about there is no Assets Directory..
+but don't worry! It gets created for you during the message.
+
+That's it for preparing! If you want to add custom icons:
+Go to your CustomizableSlime Directory/Folder in your Slime Rancher Directory/Folder. Go into images, and replace "slime_icon.png" and "plort_icon.png"
+with your icon! Do not remove these or else the game will error, this is why place holders (that do not show any images) are added in order to prevent that.
+
+[CUSTOMIZING YOUR SLIME]
+
+(OPTIONAL (READ BELOW ON WHY))
+1. Go to your %AppData% for your configuration files. (C:\Users\USER\AppData\LocalLow\Monomi Park\Slime Rancher\SRML\Config\customizableog)
+
+Why is this optional? Because you can customize your slime via commands in the game. This still requires reloading of course but works!
+I like editing the configuration files directly, but if you can't figure out how, don't worry! You can use the "config" command in SRML.
+It may take extra time, but whatever to customize your slime.. right?
+
+2. Customize your slime! The names of the options should give away what it means, at the most part.
+Customizing your slime isn't hard! You just set some configs and it changes it. Editing the files directly probably shows you exactly what you need to enter.
+Although commands should work almost the same way! Either way, if you have any issues or having trouble configuring your slime just go here: https://discord.gg/N8Taura.
+This is where I can help you with your Customizable Slime! My user is, Fruitsy#3809.
+
+NOTE: Your spawn will NOT have a custom ID, please spawn it and its plorts with: "CUSTOMIZABLE_SLIME" or "CUSTOMIZABLE_PLORT".
+
+[ADDITIONAL INFORMATION]
+
+If you want to know a list of enums/ids you can use, I have provided them.
+Open Enums.txt to see all the enums you can use for customizing! Again, if you have any issues or confusion read above on where to request help.
+NOTE: If you aren't that advanced with modding/coding, you don't have to configure AdvancedConfig. In fact, everything is set by default so don't worry!
+ANOTHER NOTE (FOR NON-MODDERS): EatMaps are basically what makes something happen when a slime eats a certain item? If that's a simple way to put it. The names should pretty much explain it!
+ANOTHER ANOTHER NOTE: If you enable "CAN_LARGOFY", that will create largos. Although, if you spawn them and don't get rid of them (as in kill/despawn them) and then exit the game and disable the option.. your game WILL error. 
+This will cause you the need to reinstall the mod by reloading your save without it and that would get rid of everything in the mod! This won't delete your configurations, just despawn your slime, etc. So make sure to either get rid of the largos or be ready to reload the mod! I may also note that, Largos are a BETA in this mod.
