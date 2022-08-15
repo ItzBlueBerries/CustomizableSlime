@@ -24,7 +24,7 @@ namespace CustomizableSlime.shortcut
 
             SlimeRandomMove customMove = customObj.GetComponent<SlimeRandomMove>();
 
-            customDef.Diet.Produces = new Identifiable.Id[] { Ids.CUSTOMIZABLE_PLORT };
+            customDef.Diet.Produces = new Identifiable.Id[] { ConfigurationSlime.WHAT_SLIME_PRODUCES };
             customDef.Diet.MajorFoodGroups = new SlimeEat.FoodGroup[] { ConfigurationSlime.WHAT_SLIME_EATS };
             customDef.Diet.Favorites = new Identifiable.Id[] { ConfigurationSlime.FAVORITE_SLIME_EATS };
             customDef.Diet.AdditionalFoods = new Identifiable.Id[] { ConfigurationSlime.ADDITIONAL_FOOD_SLIME_EATS };
