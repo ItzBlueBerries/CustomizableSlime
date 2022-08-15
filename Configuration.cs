@@ -1,4 +1,5 @@
-﻿using SRML.Config.Attributes;
+﻿using CustomizableSlime;
+using SRML.Config.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -126,6 +127,8 @@ class ConfigurationSlime
 
     public static Identifiable.Id WHAT_SLIME_ACTS_LIKE = Identifiable.Id.PINK_SLIME;
 
+    public static Identifiable.Id WHAT_SLIME_PRODUCES = Ids.CUSTOMIZABLE_PLORT;
+
     public static SlimeEat.FoodGroup WHAT_SLIME_EATS = SlimeEat.FoodGroup.VEGGIES;
 
     public static Identifiable.Id ADDITIONAL_FOOD_SLIME_EATS = Identifiable.Id.HEN;
@@ -135,8 +138,6 @@ class ConfigurationSlime
     public static Identifiable.Id FAVORITE_SLIME_TOY = Identifiable.Id.BEACH_BALL_TOY;
 
     public static Vacuumable.Size VACPACK_SIZE = Vacuumable.Size.NORMAL;
-
-    public static ZoneDirector.Zone SPAWN_ZONE = ZoneDirector.Zone.REEF;
 
     public static byte SLIME_TOP_COLOR_R = 255;
 
