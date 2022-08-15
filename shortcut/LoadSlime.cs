@@ -8,6 +8,7 @@ using static ShortcutLib.Shortcut;
 using SRML.SR;
 using SRML.SR.Utils;
 using CustomizableSlime.behaviours;
+using MonomiPark.SlimeRancher.Regions;
 
 namespace CustomizableSlime.shortcut
 {
@@ -29,6 +30,8 @@ namespace CustomizableSlime.shortcut
             customDef.Diet.AdditionalFoods = new Identifiable.Id[] { ConfigurationSlime.ADDITIONAL_FOOD_SLIME_EATS };
             customDef.CanLargofy = ConfigurationSlime.CAN_LARGOFY;
             customDef.FavoriteToys = new Identifiable.Id[] { ConfigurationSlime.FAVORITE_SLIME_TOY };
+
+            customObj.transform.localScale *= ConfigurationAdvanced.SLIME_LOCAL_SCALE;
 
             if (ConfigurationSlime.TARR_SUPPORT)
             {
@@ -127,6 +130,65 @@ namespace CustomizableSlime.shortcut
             }
 
             PediaRegistry.RegisterIdEntry(Ids.CUSTOMIZABLE_SLIME_ENTRY, OtherFunc.CreateSprite(OtherFunc.LoadAsset("Images\\slime_icon.png")));
+        }
+
+        public static void PreloadSpawn()
+        {
+            if (!ConfigurationAdditional.DISABLE_SPAWNING)
+            {
+                if (ConfigurationZone.SPAWN_EVERYWHERE)
+                {
+                    SRCallbacks.PreSaveGameLoad += (s =>
+                    {
+                        foreach (DirectedSlimeSpawner spawner in UnityEngine.Object.FindObjectsOfType<DirectedSlimeSpawner>()
+                            .Where(ss =>
+                            {
+                                ZoneDirector.Zone zone = ss.GetComponentInParent<Region>(true).GetZoneId();
+                                return zone == ZoneDirector.Zone.NONE || zone == ZoneDirector.Zone.RANCH || zone == ZoneDirector.Zone.REEF || zone == ZoneDirector.Zone.QUARRY || zone == ZoneDirector.Zone.MOSS || zone == ZoneDirector.Zone.DESERT || zone == ZoneDirector.Zone.SEA || zone == ZoneDirector.Zone.RUINS || zone == ZoneDirector.Zone.RUINS_TRANSITION || zone == ZoneDirector.Zone.WILDS || zone == ZoneDirector.Zone.SLIMULATIONS;
+                            }))
+                        {
+                            foreach (DirectedActorSpawner.SpawnConstraint constraint in spawner.constraints)
+                            {
+                                List<SlimeSet.Member> members = new List<SlimeSet.Member>(constraint.slimeset.members)
+                            {
+                                new SlimeSet.Member
+                                {
+                                    prefab = GameContext.Instance.LookupDirector.GetPrefab(Ids.CUSTOMIZABLE_SLIME),
+                                    weight = ConfigurationZone.SPAWN_CHANCE
+                                }
+                            };
+                                constraint.slimeset.members = members.ToArray();
+                            }
+                        }
+                    });
+                }
+                else
+                {
+                    SRCallbacks.PreSaveGameLoad += (s =>
+                    {
+                        foreach (DirectedSlimeSpawner spawner in UnityEngine.Object.FindObjectsOfType<DirectedSlimeSpawner>()
+                            .Where(ss =>
+                            {
+                                ZoneDirector.Zone zone = ss.GetComponentInParent<Region>(true).GetZoneId();
+                                return zone == ConfigurationZone.SPAWN_ZONE_1 | zone == ConfigurationZone.SPAWN_ZONE_2 | zone == ConfigurationZone.SPAWN_ZONE_3 | zone == ConfigurationZone.SPAWN_ZONE_4 | zone == ConfigurationZone.SPAWN_ZONE_5;
+                            }))
+                        {
+                            foreach (DirectedActorSpawner.SpawnConstraint constraint in spawner.constraints)
+                            {
+                                List<SlimeSet.Member> members = new List<SlimeSet.Member>(constraint.slimeset.members)
+                                {
+                                    new SlimeSet.Member
+                                    {
+                                        prefab = GameContext.Instance.LookupDirector.GetPrefab(Ids.CUSTOMIZABLE_SLIME),
+                                        weight = ConfigurationZone.SPAWN_CHANCE
+                                    }
+                                };
+                                constraint.slimeset.members = members.ToArray();
+                            }
+                        }
+                    });
+                }
+            }
         }
     }
 }

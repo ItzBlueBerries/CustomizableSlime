@@ -12,7 +12,8 @@ namespace CustomizableSlime.shortcut
     {
         public static void LoadPlort()
         {
-            Slime.CreatePlort(ConfigurationPlort.WHAT_PLORT_LOOKS_LIKE, Ids.CUSTOMIZABLE_PLORT, ConfigurationPlort.PLORT_NAME, OtherFunc.CreateSprite(OtherFunc.LoadAsset("Images\\plort_icon.png")), ConfigPlort.PlortVacpackColor, ConfigurationPlort.WHAT_PLORT_LOOKS_LIKE, ConfigurationPlort.PLORT_PRICE, ConfigurationPlort.PLORT_SATURATION, ConfigurationPlort.VACPACK_SIZE);
+            GameObject customizedPlort = Slime.CreatePlort(ConfigurationPlort.WHAT_PLORT_LOOKS_LIKE, Ids.CUSTOMIZABLE_PLORT, ConfigurationPlort.PLORT_NAME, OtherFunc.CreateSprite(OtherFunc.LoadAsset("Images\\plort_icon.png")), ConfigPlort.PlortVacpackColor, ConfigurationPlort.WHAT_PLORT_LOOKS_LIKE, ConfigurationPlort.PLORT_PRICE, ConfigurationPlort.PLORT_SATURATION, ConfigurationPlort.VACPACK_SIZE);
+            customizedPlort.transform.localScale *= ConfigurationAdvanced.PLORT_LOCAL_SCALE;
 
             if (ConfigurationAdditional.RANDOM_PLORT_COLORS)
             {

@@ -95,6 +95,24 @@ class ConfigurationStructure
     public static bool LUCKY_COIN = false;
 }*/
 
+[ConfigFile("SpawnZoneConfig")]
+class ConfigurationZone
+{
+    public static bool SPAWN_EVERYWHERE = false;
+
+    public static float SPAWN_CHANCE = 0.3f;
+
+    public static ZoneDirector.Zone SPAWN_ZONE_1 = ZoneDirector.Zone.REEF;
+
+    public static ZoneDirector.Zone SPAWN_ZONE_2 = ZoneDirector.Zone.NONE;
+
+    public static ZoneDirector.Zone SPAWN_ZONE_3 = ZoneDirector.Zone.NONE;
+
+    public static ZoneDirector.Zone SPAWN_ZONE_4 = ZoneDirector.Zone.NONE;
+
+    public static ZoneDirector.Zone SPAWN_ZONE_5 = ZoneDirector.Zone.NONE;
+}
+
 [ConfigFile("CustomSlime")]
 class ConfigurationSlime
 {
@@ -119,8 +137,6 @@ class ConfigurationSlime
     public static Vacuumable.Size VACPACK_SIZE = Vacuumable.Size.NORMAL;
 
     public static ZoneDirector.Zone SPAWN_ZONE = ZoneDirector.Zone.REEF;
-
-    public static float SPAWN_CHANCE = 0.3f;
 
     public static byte SLIME_TOP_COLOR_R = 255;
 
@@ -381,9 +397,13 @@ class ConfigurationBehaviours
 [ConfigFile("AdvancedConfig")]
 class ConfigurationAdvanced
 {
+    public static float SLIME_LOCAL_SCALE = 1f;
+
     public static float SLIME_SPEED_FACTOR = 1f;
 
     public static float SLIME_VERTICAL_FACTOR = 1f;
+
+    public static float PLORT_LOCAL_SCALE = 1f;
 
     public static float SLIME_FLEE_DISTANCE = 25f;
 

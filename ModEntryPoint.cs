@@ -22,33 +22,7 @@ namespace CustomizableSlime
             TranslationPatcher.AddUITranslation("m.foodgroup.plorts", "Plorts");
             TranslationPatcher.AddUITranslation("m.foodgroup.nontarrgold_slimes", "Slimes");
             CustomizablePedia.PreLoadPredia();
-
-            if (!ConfigurationAdditional.DISABLE_SPAWNING)
-            {
-                SRCallbacks.PreSaveGameLoad += (s =>
-                {
-                    foreach (DirectedSlimeSpawner spawner in UnityEngine.Object.FindObjectsOfType<DirectedSlimeSpawner>()
-                        .Where(ss =>
-                        {
-                            ZoneDirector.Zone zone = ss.GetComponentInParent<Region>(true).GetZoneId();
-                            return zone == ConfigurationSlime.SPAWN_ZONE;
-                        }))
-                    {
-                        foreach (DirectedActorSpawner.SpawnConstraint constraint in spawner.constraints)
-                        {
-                            List<SlimeSet.Member> members = new List<SlimeSet.Member>(constraint.slimeset.members)
-                            {
-                            new SlimeSet.Member
-                            {
-                                prefab = GameContext.Instance.LookupDirector.GetPrefab(Ids.CUSTOMIZABLE_SLIME),
-                                weight = ConfigurationSlime.SPAWN_CHANCE
-                            }
-                            };
-                            constraint.slimeset.members = members.ToArray();
-                        }
-                    }
-                });
-            }
+            shortcut.CustomizableSlime.PreloadSpawn();
         }
 
         public override void Load()
