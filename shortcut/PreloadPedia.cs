@@ -14,13 +14,13 @@ namespace CustomizableSlime.shortcut
                 Ids.CUSTOMIZABLE_SLIME,
                 Ids.CUSTOMIZABLE_SLIME_ENTRY,
                 OtherFunc.CreateSprite(OtherFunc.LoadAsset("Images\\slime_icon.png")),
-                ConfigurationPedia.SLIMEPEDIA_TITLE,
-                ConfigurationPedia.SLIMEPEDIA_INTRO,
-                ConfigurationPedia.SLIMEPEDIA_DIET,
-                ConfigurationPedia.SLIMEPEDIA_FAVORITE,
-                ConfigurationPedia.SLIMEPEDIA_SLIMEOLOGY,
-                ConfigurationPedia.SLIMEPEDIA_RISKS,
-                ConfigurationPedia.SLIMEPEDIA_PLORTONOMICS
+                ConfigurationSlime.SLIMEPEDIA_TITLE,
+                ConfigurationSlime.SLIMEPEDIA_INTRO,
+                ConfigurationSlime.SLIMEPEDIA_DIET,
+                ConfigurationSlime.SLIMEPEDIA_FAVORITE,
+                ConfigurationSlime.SLIMEPEDIA_SLIMEOLOGY,
+                ConfigurationSlime.SLIMEPEDIA_RISKS,
+                ConfigurationSlime.SLIMEPEDIA_PLORTONOMICS
             );
         }
     }

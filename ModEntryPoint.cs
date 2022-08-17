@@ -7,16 +7,19 @@ using System.Linq;
 using System.Text;
 using CustomizableSlime.shortcut;
 using System.IO;
+using static ShortcutLib.Shortcut;
+using static ShortcutLib.Debugging;
+using CustomizableSlime.behaviours;
 
 namespace CustomizableSlime
 {
     public class Main : ModEntryPoint
     {
-
         public override void PreLoad()
         {
             HarmonyInstance.PatchAll();
             Checks.AssetsCheck();
+            Enum.Parse(typeof(Identifiable.Id), ConfigurationSlime.WHAT_SLIME_PRODUCES);
             if (ConfigurationSlime.CAN_LARGOFY)
             { CustomizableLargos.CreateIdentifiables(); }
             TranslationPatcher.AddUITranslation("m.foodgroup.plorts", "Plorts");
@@ -37,10 +40,6 @@ namespace CustomizableSlime
             { CustomizableLargos.LoadLargos(); }
         }
 
-        public override void PostLoad()
-        {
-
-        }
-
+        public override void PostLoad() { }
     }
 }

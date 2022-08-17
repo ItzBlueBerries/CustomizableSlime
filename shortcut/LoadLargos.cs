@@ -33,12 +33,16 @@ namespace CustomizableSlime.shortcut
         public static void LoadLargos()
         {
             LargoProps array =
-            LargoProps.REPLACE_BASE_MAT_AS_SLIME2 |
-            LargoProps.RECOLOR_BASE_MAT_AS_SLIME1 |
-            LargoProps.RECOLOR_SLIME2_ADDON_MATS |
-            LargoProps.SWAP_EYES |
-            LargoProps.SWAP_MOUTH |
-            LargoProps.GENERATE_NAME;
+                ConfigurationLargoProps.LARGO_PROPERTY_1 |
+                ConfigurationLargoProps.LARGO_PROPERTY_2 |
+                ConfigurationLargoProps.LARGO_PROPERTY_3 |
+                ConfigurationLargoProps.LARGO_PROPERTY_4 |
+                ConfigurationLargoProps.LARGO_PROPERTY_5 |
+                ConfigurationLargoProps.LARGO_PROPERTY_6 |
+                ConfigurationLargoProps.LARGO_PROPERTY_7 |
+                ConfigurationLargoProps.LARGO_PROPERTY_8 |
+                ConfigurationLargoProps.LARGO_PROPERTY_9 |
+                ConfigurationLargoProps.LARGO_PROPERTY_10;
 
             CraftLargo(LargoIds.CUSTOMIZABLE_PINK_LARGO, Ids.CUSTOMIZABLE_SLIME, Identifiable.Id.PINK_SLIME, array);
             CraftLargo(LargoIds.CUSTOMIZABLE_ROCK_LARGO, Ids.CUSTOMIZABLE_SLIME, Identifiable.Id.ROCK_SLIME, array);

@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,7 +39,8 @@
     <Reference Include="0Harmony">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Slime Rancher\SRML\Libs\0Harmony.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-CSharp_old">
+    <Reference Include="Assembly-CSharp_old, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Slime Rancher\SlimeRancher_Data\Managed\Assembly-CSharp_old.dll</HintPath>
     </Reference>
     <Reference Include="ShortcutLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -68,22 +70,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="behaviours\AgitatedKill.cs" />
     <Compile Include="behaviours\BetterBreakOnImpact.cs" />
-    <Compile Include="behaviours\BetterSlimeFlee.cs" />
+    <Compile Include="behaviours\SlimeRunCommand.cs" />
     <Compile Include="Checks.cs" />
     <Compile Include="Configuration.cs" />
+    <None Include="other\ReloadConfig.cs" />
     <Compile Include="shortcut\LoadLargos.cs" />
-    <Compile Include="shortcut\ConfigSettings.cs" />
     <Compile Include="shortcut\LoadBehaviours.cs" />
     <Compile Include="shortcut\LoadPlort.cs" />
     <Compile Include="shortcut\LoadSlime.cs" />
     <Compile Include="shortcut\PreloadPedia.cs" />
-    <None Include="CustomizablePlort.cs" />
-    <None Include="CustomizableSlime.cs" />
     <Compile Include="ModdedIds.cs" />
     <Compile Include="ModEntryPoint.cs" />
     <Compile Include="OtherFunc.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="modinfo.json" />
@@ -95,6 +95,10 @@
     <Content Include="instructions\Instructions.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Plans.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

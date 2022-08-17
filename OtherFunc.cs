@@ -31,6 +31,13 @@ internal class OtherFunc
         sampleTexture.LoadImage(byteArray);
         return sampleTexture;
     }
+
+    public static byte[] StringToByte(string stringToParse)
+    {
+        stringToParse = stringToParse.Trim();
+        byte[] stringByteArray = Array.ConvertAll(stringToParse.Split(','), byte.Parse);
+        return stringByteArray;
+    }
 }
 
 internal class RandomFunc

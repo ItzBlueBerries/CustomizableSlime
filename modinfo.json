@@ -3,7 +3,7 @@
   "name": "Customizable Slime",
   "author": "FruitsyOG",
   "description": "Customize your very own slime from within configurations!",
-  "version": "1.0",
+  "version": "1.1",
   "load_after": [
     "shortcutlibog"
   ]

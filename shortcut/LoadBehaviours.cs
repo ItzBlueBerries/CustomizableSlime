@@ -56,12 +56,6 @@ namespace CustomizableSlime.shortcut
                 customizedObject.GetComponent<AttackPlayer>().shouldAttackPlayer = true;
                 customizedObject.GetComponent<AttackPlayer>().damagePerAttack = ConfigurationAdvanced.ATTACK_PLAYER_DAMAGE;
             }
-            if (ConfigurationBehaviours.HAS_SLIME_FLEE)
-            {
-                Extractor component = SRSingleton<GameContext>.Instance.LookupDirector.GetGadgetDefinition(Gadget.Id.EXTRACTOR_PUMP_ABYSSAL).prefab.GetComponent<Extractor>();
-                customizedObject.AddComponent<BetterSlimeFlee>();
-                customizedObject.GetComponent<BetterSlimeFlee>().disappearFX = component.produces[5].spawnFX;
-            }
             if (!ConfigurationBehaviours.HAS_FLEE_THREATS)
             { UnityEngine.Object.Destroy(customizedObject.GetComponent<FleeThreats>()); }
             if (ConfigurationBehaviours.HAS_FLEE_THREATS)
@@ -139,6 +133,10 @@ namespace CustomizableSlime.shortcut
                 customizedObject.GetComponent<TentacleGrapple>().maxSearchRad = ConfigurationAdvanced.TARR_GRAB_MAX_RADIUS;
                 customizedObject.GetComponent<TentacleGrapple>().tentaclePrefab = component.tentaclePrefab;
             }
+            if (ConfigurationBehaviours.HAS_AGITATED_KILL)
+            { customizedObject.AddComponent<AgitatedKill>(); customizedObject.GetComponent<AgitatedKill>().delay = ConfigurationAdvanced.AGITATED_KILL_DELAY; }
+            if (ConfigurationBehaviours.HAS_SLIME_RUN_COMMAND)
+            { customizedObject.AddComponent<SlimeRunCommand>(); customizedObject.GetComponent<SlimeRunCommand>().delay = ConfigurationAdvanced.SLIME_RUN_COMMAND_DELAY; }
         }
     }
 }

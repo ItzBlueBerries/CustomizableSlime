@@ -37,3 +37,8 @@ NOTE: If you aren't that advanced with modding/coding, you don't have to configu
 ANOTHER NOTE (FOR NON-MODDERS): EatMaps are basically what makes something happen when a slime eats a certain item? If that's a simple way to put it. The names should pretty much explain it!
 ANOTHER ANOTHER NOTE: If you enable "CAN_LARGOFY", that will create largos. Although, if you spawn them and don't get rid of them (as in kill/despawn them) and then exit the game and disable the option.. your game WILL error. 
 This will cause you the need to reinstall the mod by reloading your save without it and that would get rid of everything in the mod! This won't delete your configurations, just despawn your slime, etc. So make sure to either get rid of the largos or be ready to reload the mod! I may also note that, Largos are a BETA in this mod.
+
+JUST OTHER NOTES:
+The numbers in Enum.txt are NOT what you set for your slimes. Please set the ID next to the numbers, the numbers are just for listing.
+AGITATED_KILL_DELAY uses seconds, just enter how many seconds you want for the slime to wait. Its also random slimes as of now. (Includes Modded) 
+(This also goes for other behaviours that use Delay, besides the randomizing.)
