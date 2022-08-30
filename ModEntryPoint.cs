@@ -10,6 +10,9 @@ using System.IO;
 using static ShortcutLib.Shortcut;
 using static ShortcutLib.Debugging;
 using CustomizableSlime.behaviours;
+using UnityEngine;
+using SRML.Utils;
+using SRML.SR.SaveSystem;
 
 namespace CustomizableSlime
 {
@@ -27,7 +30,7 @@ namespace CustomizableSlime
             CustomizablePedia.PreLoadPredia();
             shortcut.CustomizableSlime.PreloadSpawn();
         }
-
+        
         public override void Load()
         {
             /*CustomizableSlime.LoadCustomizedSlime();
@@ -35,6 +38,7 @@ namespace CustomizableSlime
 
             shortcut.CustomizableSlime.LoadSlime();
             CustomizablePlort.LoadPlort();
+            shortcut.CustomizableSlime.LoadStyle();
 
             if (ConfigurationSlime.CAN_LARGOFY)
             { CustomizableLargos.LoadLargos(); }

@@ -38,6 +38,13 @@ internal class OtherFunc
         byte[] stringByteArray = Array.ConvertAll(stringToParse.Split(','), byte.Parse);
         return stringByteArray;
     }
+
+    public static float[] StringToFloat(string stringToParse)
+    {
+        stringToParse = stringToParse.Trim();
+        float[] stringFloatArray = Array.ConvertAll(stringToParse.Split(','), float.Parse);
+        return stringFloatArray;
+    }
 }
 
 internal class RandomFunc

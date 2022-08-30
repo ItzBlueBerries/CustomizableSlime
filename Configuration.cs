@@ -9,6 +9,56 @@ using UnityEngine;
 using static SRML.SR.SlimeRegistry;
 
 
+[ConfigFile("StyleAppearance")]
+class ConfigurationStyleApp
+{
+    public static bool SECRET_STYLES_ENABLED = false;
+
+    public static string STYLE_NAME = "De-Customizable Slime";
+
+    public static Identifiable.Id WHAT_STYLE_MATERIAL = Identifiable.Id.PINK_SLIME;
+
+    public static string STYLE_TOP_COLOR_RGB = "0, 0, 0";
+
+    public static string STYLE_MIDDLE_COLOR_RGB = "0, 0, 0";
+
+    public static string STYLE_BOTTOM_COLOR_RGB = "0, 0, 0";
+
+    public static string STYLE_SPEC_COLOR_RGB = "0, 0, 0";
+
+    public static string STYLE_VAC_COLOR_RGB = "255, 255, 255";
+
+    public static string MOUTH_TOP_COLOR_RGB = "255, 255, 255";
+
+    public static string MOUTH_MIDDLE_COLOR_RGB = "255, 255, 255";
+
+    public static string MOUTH_BOTTOM_COLOR_RGB = "255, 255, 255";
+
+    public static string EYES_TOP_COLOR_RGB = "255, 255, 255";
+
+    public static string EYES_MIDDLE_COLOR_RGB = "255, 255, 255";
+
+    public static string EYES_BOTTOM_COLOR_RGB = "255, 255, 255";
+
+    public static string SPLAT_TOP_COLOR_RGB = "0, 0, 0";
+
+    public static string SPLAT_MIDDLE_COLOR_RGB = "0, 0, 0";
+
+    public static string SPLAT_BOTTOM_COLOR_RGB = "0, 0, 0";
+}
+
+[ConfigFile("StyleCosmetic")]
+class ConfigurationCosmetic
+{
+    public static string COSMETIC_POD_ID_NAME = "CustomizableCosmeticPod";
+
+    public static string COSMETIC_POD_POSITION = "103.6, 12.3, -136.7";
+
+    public static string COSMETIC_POD_PARENT = "zoneRANCH/cellRanch_Entrance/Sector";
+
+    public static string COSMETIC_POD_ROTATION = "0, 0, 0";
+}
+
 [ConfigFile("EatMapConfig")]
 class ConfigurationEatMap
 {
@@ -258,6 +308,16 @@ class ConfigurationStrucConfig
     public static string PHOSPHOR_GLOW_MID_RGB = "0, 0, 0";
 
     public static string PHOSPHOR_GLOW_BOT_RGB = "0, 0, 0";
+
+    public static string STYLED_RAD_AURA_MIDDLE_RGB = "0, 0, 0";
+
+    public static string STYLED_RAD_AURA_EDGE_RGB = "255, 255, 255";
+
+    public static string STYLED_PHOSPHOR_GLOW_TOP_RGB = "255, 255, 255";
+
+    public static string STYLED_PHOSPHOR_GLOW_MID_RGB = "255, 255, 255";
+
+    public static string STYLED_PHOSPHOR_GLOW_BOT_RGB = "255, 255, 255";
 }
 
 
@@ -273,6 +333,10 @@ class ConfigurationAdditional
     public static bool REMOVE_PHOSPHOR_WINGS = false;
 
     public static bool REMOVE_PHOSPHOR_ANTENNAS = false;
+
+    public static bool REMOVE_STYLED_PHOSPHOR_WINGS = false;
+
+    public static bool REMOVE_STYLED_PHOSPHOR_ANTENNAS = false;
 }
 
 

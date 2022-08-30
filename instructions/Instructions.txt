@@ -38,6 +38,16 @@ ANOTHER NOTE (FOR NON-MODDERS): EatMaps are basically what makes something happe
 ANOTHER ANOTHER NOTE: If you enable "CAN_LARGOFY", that will create largos. Although, if you spawn them and don't get rid of them (as in kill/despawn them) and then exit the game and disable the option.. your game WILL error. 
 This will cause you the need to reinstall the mod by reloading your save without it and that would get rid of everything in the mod! This won't delete your configurations, just despawn your slime, etc. So make sure to either get rid of the largos or be ready to reload the mod! I may also note that, Largos are a BETA in this mod.
 
+[SECRET STYLES]
+The secret styles are a little more advanced if you attempt to edit the already placed cosmetic pod. You can use the "debug" command in order to get your positionings, parents, etc.
+Although I am not going to give a full tutorial on how to use the debug command, so hopefully the information it provides should say for itself.
+They will only appear if you enable "SECRET_STYLES_ENABLE". Its false by default. Have fun with that now!
+
+[SECONDARY SLIME]
+All the instructions apply to the secondary slime as well. You just REQUIRE this mod in order to add a new slime.
+They should be no different besides being 2 different slimes/mods. Just look at the instructions or enums in this mod for the other one.
+There should be NO incompatibilities unless something is being done wrong, at least from what I know.
+
 JUST OTHER NOTES:
 The numbers in Enum.txt are NOT what you set for your slimes. Please set the ID next to the numbers, the numbers are just for listing.
 AGITATED_KILL_DELAY uses seconds, just enter how many seconds you want for the slime to wait. Its also random slimes as of now. (Includes Modded) 
