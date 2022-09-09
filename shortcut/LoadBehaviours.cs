@@ -16,6 +16,8 @@ namespace CustomizableSlime.shortcut
             GameObject customizedObject = Prefab.GetPrefab(Ids.CUSTOMIZABLE_SLIME);
             SlimeAppearance customizedAppearance = Slime.GetSlimeDef(Ids.CUSTOMIZABLE_SLIME).AppearancesDefault[0];
 
+            if (ConfigurationBehaviours.HAS_DAMAGE_ON_TOUCH)
+            { customizedObject.AddComponent<DamagePlayerOnTouch>().damagePerTouch = ConfigurationAdvanced.DAMAGE_ON_TOUCH_DAMAGE; customizedObject.GetComponent<DamagePlayerOnTouch>().repeatTime = ConfigurationAdvanced.DAMAGE_ON_TOUCH_REPEAT; }
             if (ConfigurationBehaviours.HAS_SLIME_HOVER)
             { customizedObject.AddComponent<SlimeHover>(); }
             if (ConfigurationBehaviours.HAS_PUDDLE_SLIME_SCOOT)

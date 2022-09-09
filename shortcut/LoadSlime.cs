@@ -14,6 +14,7 @@ namespace CustomizableSlime.shortcut
 {
     internal class CustomizableSlime
     {
+        internal static (SlimeDefinition, GameObject, SlimeAppearance) customizedSlime;
         public static void LoadSlime()
         {
             var SplatTopC = StringToByte(ConfigurationSlime.SPLAT_TOP_COLOR_RGB);
@@ -21,7 +22,10 @@ namespace CustomizableSlime.shortcut
             var SplatBotC = StringToByte(ConfigurationSlime.SPLAT_BOTTOM_COLOR_RGB);
             var VacC = StringToByte(ConfigurationSlime.SLIME_VAC_COLOR_RGB);
 
-            (SlimeDefinition, GameObject, SlimeAppearance) customizedSlime = Slime.CreateSlime(ConfigurationSlime.WHAT_SLIME_LOOKS_LIKE, ConfigurationSlime.WHAT_SLIME_ACTS_LIKE, Ids.CUSTOMIZABLE_SLIME, ConfigurationSlime.SLIME_NAME, OtherFunc.CreateSprite(OtherFunc.LoadAsset("Images\\slime_icon.png")), 
+            if (ConfigurationSlime.WHAT_SLIME_LOOKS_LIKE == Identifiable.Id.QUICKSILVER_SLIME)
+                ConfigurationSlime.WHAT_SLIME_LOOKS_LIKE = Identifiable.Id.PINK_SLIME;
+
+            customizedSlime = Slime.CreateSlime(ConfigurationSlime.WHAT_SLIME_LOOKS_LIKE, ConfigurationSlime.WHAT_SLIME_ACTS_LIKE, Ids.CUSTOMIZABLE_SLIME, ConfigurationSlime.SLIME_NAME, OtherFunc.CreateSprite(OtherFunc.LoadAsset("Images\\slime_icon.png")), 
                 new Color32(VacC[0], VacC[1], VacC[2], byte.MaxValue),
                 new Color32(SplatTopC[0], SplatTopC[1], SplatTopC[2], byte.MaxValue),
                 new Color32(SplatMidC[0], SplatMidC[1], SplatMidC[2], byte.MaxValue),
@@ -34,12 +38,19 @@ namespace CustomizableSlime.shortcut
 
             SlimeRandomMove customMove = customObj.GetComponent<SlimeRandomMove>();
 
-            customDef.Diet.Produces = new Identifiable.Id[] { (Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), ConfigurationSlime.WHAT_SLIME_PRODUCES) };
-            customDef.Diet.MajorFoodGroups = new SlimeEat.FoodGroup[] { ConfigurationSlime.WHAT_SLIME_EATS };
-            customDef.Diet.Favorites = new Identifiable.Id[] { ConfigurationSlime.FAVORITE_SLIME_EATS };
-            customDef.Diet.AdditionalFoods = new Identifiable.Id[] { ConfigurationSlime.ADDITIONAL_FOOD_SLIME_EATS };
+            List<Identifiable.Id> list = new List<Identifiable.Id>();
+
+            foreach (string stringedID in ConfigurationSlime.WHAT_SLIME_PRODUCES)
+            {
+                list.Add((Identifiable.Id)Enum.Parse(typeof(Identifiable.Id), stringedID));
+            }
+
+            customDef.Diet.Produces = list.ToArray();
+            customDef.Diet.MajorFoodGroups = ConfigurationSlime.WHAT_SLIME_EATS;
+            customDef.Diet.Favorites = ConfigurationSlime.FAVORITE_SLIME_EATS;
+            customDef.Diet.AdditionalFoods = ConfigurationSlime.ADDITIONAL_FOOD_SLIME_EATS;
             customDef.CanLargofy = ConfigurationSlime.CAN_LARGOFY;
-            customDef.FavoriteToys = new Identifiable.Id[] { ConfigurationSlime.FAVORITE_SLIME_TOY };
+            customDef.FavoriteToys = ConfigurationSlime.FAVORITE_SLIME_TOY;
 
             customObj.transform.localScale *= ConfigurationAdvanced.SLIME_LOCAL_SCALE;
 
@@ -105,6 +116,26 @@ namespace CustomizableSlime.shortcut
                 };
             }
 
+            SlimeAppearance.SlimeBone[] attachedBones = new SlimeAppearance.SlimeBone[]
+            {
+                SlimeAppearance.SlimeBone.JiggleBack,
+                SlimeAppearance.SlimeBone.JiggleBottom,
+                SlimeAppearance.SlimeBone.JiggleFront,
+                SlimeAppearance.SlimeBone.JiggleLeft,
+                SlimeAppearance.SlimeBone.JiggleRight,
+                SlimeAppearance.SlimeBone.JiggleTop
+            };
+
+            if (ConfigurationMesh.CUSTOM_MESH_ENABLED)
+            {
+                if (ConfigurationMesh.CUSTOM_MESH_ENABLED && ConfigurationSlime.WHAT_SLIME_LOOKS_LIKE == Identifiable.Id.QUANTUM_SLIME)
+                    return;
+                    (GameObject, SlimeAppearanceObject, SlimeAppearance.SlimeBone[]) customMeshBody = Structure.CreateBasicStructure(LoadAssetBundle("slime_bundle"), ConfigurationMesh.CUSTOM_MESH_OBJ_NAME, "slime_" + ConfigurationMesh.CUSTOM_MESH_OBJ_NAME, SlimeAppearance.SlimeBone.Slime, SlimeAppearance.SlimeBone.None, attachedBones, RubberBoneEffect.RubberType.Slime, ConfigurationMesh.CUSTOM_MESH_RUBBER_EFFECT);
+                customMeshBody.Item2.IgnoreLODIndex = ConfigurationMesh.CUSTOM_MESH_IGNORE_LOD_INDEX;
+                AssetsLib.MeshUtils.GenerateBoneData(customObj.GetComponent<SlimeAppearanceApplicator>(), customMeshBody.Item2, ConfigurationMesh.CUSTOM_MESH_JIGGLE, ConfigurationMesh.CUSTOM_MESH_SCALE);
+                Structure.SetStructureElement(ConfigurationMesh.CUSTOM_MESH_OBJ_NAME, customApp, new SlimeAppearanceObject[] { customMeshBody.Item2 }, 0, false, true);
+            }
+
             SlimeAppearanceStructure[] structures = customApp.Structures;
             foreach (SlimeAppearanceStructure slimeAppearanceStructure in structures)
             {
@@ -152,7 +183,7 @@ namespace CustomizableSlime.shortcut
                             customApp.Structures[1].DefaultMaterials[0] = radMaterial;
                         }
                     }
-                    if (ConfigurationSlime.WHAT_SLIME_LOOKS_LIKE == Identifiable.Id.PHOSPHOR_SLIME)
+                    if (ConfigurationSlime.WHAT_SLIME_LOOKS_LIKE == Identifiable.Id.PHOSPHOR_SLIME || ConfigurationSlime.WHAT_SLIME_MATERIAL == Identifiable.Id.PHOSPHOR_SLIME)
                     {
                         if (ConfigurationAdditional.RANDOM_SLIME_COLORS)
                         {
@@ -176,6 +207,26 @@ namespace CustomizableSlime.shortcut
                             phosMaterial.SetColor("_GlowMid", new Color32(PhosMidC[0], PhosMidC[1], PhosMidC[2], byte.MaxValue));
                             phosMaterial.SetColor("_GlowBottom", new Color32(PhosBotC[0], PhosBotC[1], PhosBotC[2], byte.MaxValue));
                             customApp.Structures[0].DefaultMaterials[0] = phosMaterial;
+                        }
+                    }
+                    if (ConfigurationSlime.WHAT_SLIME_LOOKS_LIKE == Identifiable.Id.BOOM_SLIME || ConfigurationSlime.WHAT_SLIME_MATERIAL == Identifiable.Id.BOOM_SLIME)
+                    {
+                        if (ConfigurationAdditional.RANDOM_SLIME_COLORS)
+                        {
+                            Material boomMaterial = UnityEngine.Object.Instantiate(Slime.GetSlimeDef(Identifiable.Id.BOOM_SLIME).AppearancesDefault[0].Structures[0].DefaultMaterials[0]);
+                            boomMaterial.SetColor("_CrackColor", RandomFunc.RandomColor32());
+                            customApp.Structures[0].DefaultMaterials[0] = boomMaterial;
+                        }
+                        else
+                        {
+                            var BoomCrackC = StringToByte(ConfigurationStrucConfig.BOOM_CRACKS_RGB);
+
+                            Material boomMaterial = UnityEngine.Object.Instantiate(Slime.GetSlimeDef(Identifiable.Id.BOOM_SLIME).AppearancesDefault[0].Structures[0].DefaultMaterials[0]);
+                            boomMaterial.SetColor("_TopColor", new Color32(SlimeTopC[0], SlimeTopC[1], SlimeTopC[2], byte.MaxValue));
+                            boomMaterial.SetColor("_MiddleColor", new Color32(SlimeMidC[0], SlimeMidC[1], SlimeMidC[2], byte.MaxValue));
+                            boomMaterial.SetColor("_BottomColor", new Color32(SlimeBotC[0], SlimeBotC[1], SlimeBotC[2], byte.MaxValue));
+                            boomMaterial.SetColor("_CrackColor", new Color32(BoomCrackC[0], BoomCrackC[1], BoomCrackC[2], byte.MaxValue));
+                            customApp.Structures[0].DefaultMaterials[0] = boomMaterial;
                         }
                     }
                 }
@@ -226,7 +277,7 @@ namespace CustomizableSlime.shortcut
                 var SlimeTopColor = StringToByte(ConfigurationStyleApp.STYLE_TOP_COLOR_RGB);
                 var SlimeMidColor = StringToByte(ConfigurationStyleApp.STYLE_MIDDLE_COLOR_RGB);
                 var SlimeBotColor = StringToByte(ConfigurationStyleApp.STYLE_BOTTOM_COLOR_RGB);
-                var SlimeSpecColor = StringToByte(ConfigurationStyleApp.STYLE_BOTTOM_COLOR_RGB);
+                var SlimeSpecColor = StringToByte(ConfigurationStyleApp.STYLE_SPEC_COLOR_RGB);
 
                 if (ConfigurationAdditional.REMOVE_STYLED_PHOSPHOR_ANTENNAS && ConfigurationAdditional.REMOVE_STYLED_PHOSPHOR_WINGS && ConfigurationSlime.WHAT_SLIME_LOOKS_LIKE == Identifiable.Id.PHOSPHOR_SLIME)
                 {
@@ -259,6 +310,27 @@ namespace CustomizableSlime.shortcut
                     Bottom = new Color32(SplatColorBot[0], SplatColorBot[1], SplatColorBot[2], byte.MaxValue),
                     Ammo = new Color32(SplatColorAm[0], SplatColorAm[1], SplatColorAm[2], byte.MaxValue)
                 };
+
+                SlimeAppearance.SlimeBone[] attachedBones = new SlimeAppearance.SlimeBone[]
+                {
+                    SlimeAppearance.SlimeBone.JiggleBack,
+                    SlimeAppearance.SlimeBone.JiggleBottom,
+                    SlimeAppearance.SlimeBone.JiggleFront,
+                    SlimeAppearance.SlimeBone.JiggleLeft,
+                    SlimeAppearance.SlimeBone.JiggleRight,
+                    SlimeAppearance.SlimeBone.JiggleTop
+                };
+
+                if (ConfigurationMesh.STYLED_CUSTOM_MESH_ENABLED)
+                {
+                    (GameObject, SlimeAppearanceObject, SlimeAppearance.SlimeBone[]) styledCustomMeshBody = Structure.CreateBasicStructure(LoadAssetBundle("slime_bundle"), ConfigurationMesh.STYLED_CUSTOM_MESH_OBJ_NAME, "exotic_slime_" + ConfigurationMesh.STYLED_CUSTOM_MESH_OBJ_NAME, SlimeAppearance.SlimeBone.Slime, SlimeAppearance.SlimeBone.None, attachedBones, RubberBoneEffect.RubberType.Slime, ConfigurationMesh.STYLED_CUSTOM_MESH_RUBBER_EFFECT);
+                    styledCustomMeshBody.Item2.IgnoreLODIndex = ConfigurationMesh.STYLED_CUSTOM_MESH_IGNORE_LOD_INDEX;
+                    AssetsLib.MeshUtils.GenerateBoneData(customizedSlime.Item2.GetComponent<SlimeAppearanceApplicator>(), styledCustomMeshBody.Item2, ConfigurationMesh.STYLED_CUSTOM_MESH_JIGGLE, ConfigurationMesh.STYLED_CUSTOM_MESH_SCALE);
+                    Structure.SetStructureElement(ConfigurationMesh.STYLED_CUSTOM_MESH_OBJ_NAME, customizedStyle, new SlimeAppearanceObject[] { styledCustomMeshBody.Item2 }, 0, false, true);
+                }
+
+                if (ConfigurationMesh.STYLED_CUSTOM_MESH_ENABLED && ConfigurationSlime.WHAT_SLIME_LOOKS_LIKE == Identifiable.Id.QUANTUM_SLIME)
+                    UnityEngine.Object.Destroy(customizedStyle.QubitAppearance);
 
                 SlimeAppearanceStructure[] structures = customizedStyle.Structures;
                 foreach (SlimeAppearanceStructure slimeAppearanceStructure in structures)
@@ -326,6 +398,24 @@ namespace CustomizableSlime.shortcut
                                 customizedStyle.Structures[0].DefaultMaterials[0].SetColor("_GlowTop", new Color32(StyledPhosTopC[0], StyledPhosTopC[1], StyledPhosTopC[2], byte.MaxValue));
                                 customizedStyle.Structures[0].DefaultMaterials[0].SetColor("_GlowMid", new Color32(StyledPhosMidC[0], StyledPhosMidC[1], StyledPhosMidC[2], byte.MaxValue));
                                 customizedStyle.Structures[0].DefaultMaterials[0].SetColor("_GlowBottom", new Color32(StyledPhosBotC[0], StyledPhosBotC[1], StyledPhosBotC[2], byte.MaxValue));
+                            }
+                        }
+                        if (ConfigurationSlime.WHAT_SLIME_LOOKS_LIKE == Identifiable.Id.BOOM_SLIME)
+                        {
+                            if (ConfigurationAdditional.RANDOM_SLIME_COLORS)
+                            {
+                                customizedStyle.Structures[0].DefaultMaterials[0] = UnityEngine.Object.Instantiate(Slime.GetSlimeDef(Identifiable.Id.BOOM_SLIME).AppearancesDefault[0].Structures[0].DefaultMaterials[0]);
+                                customizedStyle.Structures[0].DefaultMaterials[0].SetColor("_CrackColor", RandomFunc.RandomColor32());
+                            }
+                            else
+                            {
+                                var StyledBoomCrackC = StringToByte(ConfigurationStrucConfig.STYLED_BOOM_CRACKS_RGB);
+
+                                customizedStyle.Structures[0].DefaultMaterials[0] = UnityEngine.Object.Instantiate(Slime.GetSlimeDef(Identifiable.Id.BOOM_SLIME).AppearancesDefault[0].Structures[0].DefaultMaterials[0]);
+                                customizedStyle.Structures[0].DefaultMaterials[0].SetColor("_TopColor", new Color32(SlimeTopColor[0], SlimeTopColor[1], SlimeTopColor[2], byte.MaxValue));
+                                customizedStyle.Structures[0].DefaultMaterials[0].SetColor("_MiddleColor", new Color32(SlimeMidColor[0], SlimeMidColor[1], SlimeMidColor[2], byte.MaxValue));
+                                customizedStyle.Structures[0].DefaultMaterials[0].SetColor("_BottomColor", new Color32(SlimeBotColor[0], SlimeBotColor[1], SlimeBotColor[2], byte.MaxValue));
+                                customizedStyle.Structures[0].DefaultMaterials[0].SetColor("_CrackColor", new Color32(StyledBoomCrackC[0], StyledBoomCrackC[1], StyledBoomCrackC[2], byte.MaxValue));
                             }
                         }
                     }

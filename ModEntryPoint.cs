@@ -22,7 +22,10 @@ namespace CustomizableSlime
         {
             HarmonyInstance.PatchAll();
             Checks.AssetsCheck();
-            Enum.Parse(typeof(Identifiable.Id), ConfigurationSlime.WHAT_SLIME_PRODUCES);
+            foreach (string stringedID in ConfigurationSlime.WHAT_SLIME_PRODUCES)
+            {
+                Enum.Parse(typeof(Identifiable.Id), stringedID);
+            }
             if (ConfigurationSlime.CAN_LARGOFY)
             { CustomizableLargos.CreateIdentifiables(); }
             TranslationPatcher.AddUITranslation("m.foodgroup.plorts", "Plorts");

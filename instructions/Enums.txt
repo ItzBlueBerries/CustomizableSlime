@@ -70,6 +70,14 @@ NOTE: No you cannot use Modded Slimes. If you try do that, the game will error.
 19. SPICY_TOFU
 20. KOOKADOBA_FRUIT
 
+[FOODGROUPS]
+1. VEGGIES
+2. FRUIT
+3. MEAT
+4. GINGER
+5. PLORTS
+6. NONTARRGOLD_SLIMES (Slimes basically)
+
 [CRAFTS]
 1. PRIMORDY_OIL_CRAFT
 2. DEEP_BRINE_CRAFT

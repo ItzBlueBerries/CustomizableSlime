@@ -8,6 +8,33 @@ using System.Threading.Tasks;
 using UnityEngine;
 using static SRML.SR.SlimeRegistry;
 
+[ConfigFile("CustomMesh")]
+class ConfigurationMesh
+{
+    public static bool CUSTOM_MESH_ENABLED = false;
+
+    public static string CUSTOM_MESH_OBJ_NAME = "obj_name_here";
+
+    public static float CUSTOM_MESH_JIGGLE = 1f;
+
+    public static float CUSTOM_MESH_SCALE = 1f;
+
+    public static bool CUSTOM_MESH_RUBBER_EFFECT = true;
+
+    public static bool CUSTOM_MESH_IGNORE_LOD_INDEX = false;
+
+    public static bool STYLED_CUSTOM_MESH_ENABLED = false;
+
+    public static string STYLED_CUSTOM_MESH_OBJ_NAME = "obj_name_here";
+
+    public static float STYLED_CUSTOM_MESH_JIGGLE = 1f;
+
+    public static float STYLED_CUSTOM_MESH_SCALE = 1f;
+
+    public static bool STYLED_CUSTOM_MESH_RUBBER_EFFECT = true;
+
+    public static bool STYLED_CUSTOM_MESH_IGNORE_LOD_INDEX = false;
+}
 
 [ConfigFile("StyleAppearance")]
 class ConfigurationStyleApp
@@ -209,15 +236,15 @@ class ConfigurationSlime
 
     public static Identifiable.Id WHAT_SLIME_MATERIAL = Identifiable.Id.PINK_SLIME;
 
-    public static string WHAT_SLIME_PRODUCES = "CUSTOMIZABLE_PLORT";
+    public static string[] WHAT_SLIME_PRODUCES = new string[] { "CUSTOMIZABLE_PLORT" };
 
-    public static SlimeEat.FoodGroup WHAT_SLIME_EATS = SlimeEat.FoodGroup.VEGGIES;
+    public static SlimeEat.FoodGroup[] WHAT_SLIME_EATS = new SlimeEat.FoodGroup[] { SlimeEat.FoodGroup.VEGGIES };
 
-    public static Identifiable.Id ADDITIONAL_FOOD_SLIME_EATS = Identifiable.Id.HEN;
+    public static Identifiable.Id[] ADDITIONAL_FOOD_SLIME_EATS = new Identifiable.Id[] { Identifiable.Id.HEN };
 
-    public static Identifiable.Id FAVORITE_SLIME_EATS = Identifiable.Id.BEET_VEGGIE;
+    public static Identifiable.Id[] FAVORITE_SLIME_EATS = new Identifiable.Id[] { Identifiable.Id.BEET_VEGGIE };
 
-    public static Identifiable.Id FAVORITE_SLIME_TOY = Identifiable.Id.BEACH_BALL_TOY;
+    public static Identifiable.Id[] FAVORITE_SLIME_TOY = new Identifiable.Id[] { Identifiable.Id.BEACH_BALL_TOY };
 
     public static Vacuumable.Size VACPACK_SIZE = Vacuumable.Size.NORMAL;
 
@@ -309,6 +336,8 @@ class ConfigurationStrucConfig
 
     public static string PHOSPHOR_GLOW_BOT_RGB = "0, 0, 0";
 
+    public static string BOOM_CRACKS_RGB = "0, 0, 0";
+
     public static string STYLED_RAD_AURA_MIDDLE_RGB = "0, 0, 0";
 
     public static string STYLED_RAD_AURA_EDGE_RGB = "255, 255, 255";
@@ -318,6 +347,8 @@ class ConfigurationStrucConfig
     public static string STYLED_PHOSPHOR_GLOW_MID_RGB = "255, 255, 255";
 
     public static string STYLED_PHOSPHOR_GLOW_BOT_RGB = "255, 255, 255";
+
+    public static string STYLED_BOOM_CRACKS_RGB = "255, 255, 255";
 }
 
 
@@ -343,6 +374,8 @@ class ConfigurationAdditional
 [ConfigFile("BehavioursConfig")]
 class ConfigurationBehaviours
 {
+    public static bool HAS_DAMAGE_ON_TOUCH = false;
+
     public static bool HAS_SLIME_HOVER = false;
 
     public static bool HAS_PUDDLE_SLIME_SCOOT = false;
@@ -389,6 +422,10 @@ class ConfigurationAdvanced
     public static float PLORT_LOCAL_SCALE = 1f;
 
     public static int ATTACK_PLAYER_DAMAGE = 20;
+
+    public static int DAMAGE_ON_TOUCH_DAMAGE = 10;
+
+    public static float DAMAGE_ON_TOUCH_REPEAT = 1f;
 
     public static float GOTO_PLAYER_MIN_RADIUS = 5f;
 

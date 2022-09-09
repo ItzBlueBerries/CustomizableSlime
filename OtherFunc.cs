@@ -32,6 +32,12 @@ internal class OtherFunc
         return sampleTexture;
     }
 
+    public static AssetBundle LoadAssetBundle(string bundlePath)
+    {
+        AssetBundle bundle = AssetBundle.LoadFromFile($"{Environment.CurrentDirectory}\\CustomizableSlime\\" + bundlePath);
+        return bundle;
+    }
+
     public static byte[] StringToByte(string stringToParse)
     {
         stringToParse = stringToParse.Trim();
